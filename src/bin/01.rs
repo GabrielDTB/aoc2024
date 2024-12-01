@@ -24,7 +24,12 @@ pub fn part_one(input: &str) -> Result<u32> {
 }
 
 pub fn part_two(input: &str) -> Result<u32> {
-    bail!("Solution not implemented")
+    let (left, right) = parse_input(input)?;
+    let answer = left
+        .into_iter()
+        .map(|l| l * right.iter().filter(|&&r| l == r).count() as u32)
+        .sum();
+    Ok(answer)
 }
 
 #[cfg(test)]
@@ -40,6 +45,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY)).unwrap();
-        assert_eq!(result, u32::MAX);
+        assert_eq!(result, 31);
     }
 }
