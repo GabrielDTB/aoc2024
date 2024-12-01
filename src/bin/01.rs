@@ -4,8 +4,7 @@ use itertools::Itertools;
 
 fn parse_input(input: &str) -> Result<(Vec<u32>, Vec<u32>)> {
     let result = input
-        .lines()
-        .flat_map(|line| line.split_whitespace())
+        .split_whitespace()
         .map(|item| item.parse::<u32>())
         .process_results(|iter| iter.tuples().unzip())?;
     Ok(result)
