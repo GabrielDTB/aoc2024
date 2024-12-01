@@ -4,6 +4,7 @@ on:
     # !Please set a different minute than 51 if you enable this!
     # schedule:
     #     - cron: "51 */6 * * *" # Every 6 hours
+    push:
     workflow_dispatch:
 
 jobs:
@@ -21,4 +22,4 @@ jobs:
                   year: ${{ secrets.AOC_YEAR }}
             - uses: stefanzweifel/git-auto-commit-action@v5
               with:
-                  commit_message: "update readme progress"
+                  commit_message: "Update stars in README"
