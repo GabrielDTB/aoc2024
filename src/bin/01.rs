@@ -1,5 +1,5 @@
 advent_of_code::solution!(1);
-use advent_of_code::count_occurrences;
+use advent_of_code::Counter;
 use anyhow::Result;
 use itertools::Itertools;
 
@@ -25,13 +25,11 @@ pub fn part_one(input: &str) -> Result<u32> {
 
 pub fn part_two(input: &str) -> Result<u32> {
     let (left, right) = parse_input(input)?;
-    let counts = count_occurrences(right);
+    let counts = Counter::from_iter(right);
 
     let mut answer = 0;
     for l in left {
-        if let Some(v) = counts.get(&l) {
-            answer += v * l
-        };
+        answer += l * counts.get(&l)
     }
     Ok(answer)
 }
