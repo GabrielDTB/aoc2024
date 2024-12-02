@@ -44,7 +44,29 @@ pub fn part_one(input: &str) -> Result<u32> {
 }
 
 pub fn part_two(input: &str) -> Result<u32> {
-    bail!("Solution not implemented")
+    let reports = parse_input(input)?;
+
+    let mut answer = 0;
+    'outer: for report in reports {
+        if good_report(report.clone()) {
+            answer += 1;
+            continue;
+        }
+        for i in 0..report.len() {
+            if good_report(
+                report
+                    .iter()
+                    .take(i)
+                    .chain(report.iter().skip(i + 1))
+                    .map(|e| *e)
+                    .collect::<Vec<_>>(),
+            ) {
+                answer += 1;
+                continue 'outer;
+            }
+        }
+    }
+    Ok(answer)
 }
 
 #[cfg(test)]
@@ -60,6 +82,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY)).unwrap();
-        assert_eq!(result, u32::MAX);
+        assert_eq!(result, 4);
     }
 }
