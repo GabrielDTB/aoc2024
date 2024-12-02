@@ -31,6 +31,18 @@ fn good_report(input: Vec<u32>) -> bool {
     return true;
 }
 
+// There are 3 types of errors we can recover from.
+// We can only recover from one such error.
+// - Change > 3 or < -3 or = 0 on edge.
+// - Single switch on edge.
+// - Double switch anywhere, only if removing the number
+//   between them would not cause the first kind of error.
+//
+// Implementing this seems not so straightforward...
+fn good_with_removal(input: Vec<u32>) -> bool {
+    true
+}
+
 pub fn part_one(input: &str) -> Result<u32> {
     let reports = parse_input(input)?;
 
