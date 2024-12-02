@@ -18,7 +18,7 @@ pub fn part_one(input: &str) -> Result<u32> {
 
     let mut answer = 0;
     for (l, r) in left.into_iter().zip(right) {
-        answer += if l >= r { l - r } else { r - l };
+        answer += l.abs_diff(r);
     }
     Ok(answer)
 }
